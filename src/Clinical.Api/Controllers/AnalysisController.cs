@@ -1,4 +1,6 @@
-﻿using Clinical.Application.UseCase.UseCases.Analysis.Queries.GetAllQuery;
+﻿using Clinical.Application.UseCase.UseCases.Analysis.Commands.CreateCommand;
+using Clinical.Application.UseCase.UseCases.Analysis.Queries.GetAllQuery;
+using Clinical.Application.UseCase.UseCases.Analysis.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,10 +16,25 @@ namespace Clinical.Api.Controllers
         {
             _mediator = mediator;
         }
+
         [HttpGet]
         public async Task<IActionResult> ListAnalysis()
         {
             var response = await _mediator.Send(new GetAllAnalysisQuery());
+            return Ok(response);
+        }
+
+        [HttpGet("{analysisId:int}")]
+        public async Task<IActionResult> AnalysisById(int analysisId)
+        {
+            var response = await _mediator.Send(new GetAnalysisByIdQuery() { AnalysisId = analysisId });
+            return Ok(response);
+        }
+
+        [HttpPost("Register")]
+        public async Task<IActionResult> RegisterAnalysis([FromBody] CreateAnalysisCommand command)
+        {
+            var response = await _mediator.Send(command);
             return Ok(response);
         }
     }

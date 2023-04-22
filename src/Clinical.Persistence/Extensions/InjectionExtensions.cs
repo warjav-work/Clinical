@@ -1,4 +1,6 @@
-﻿using Clinical.Persistence.Context;
+﻿using Clinical.Application.Interface.Repositories;
+using Clinical.Persistence.Context;
+using Clinical.Persistence.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Clinical.Persistence.Extensions
@@ -7,7 +9,11 @@ namespace Clinical.Persistence.Extensions
     {
         public static IServiceCollection AddInjectionPersistence(this IServiceCollection services)
         {
+            
             services.AddSingleton<ApplicationDbContext>();
+            
+            services.AddScoped<IAnalysisRepository, AnalysisRepository>();
+            
             return services;
         }
     }

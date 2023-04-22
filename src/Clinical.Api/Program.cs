@@ -1,3 +1,6 @@
+using Clinical.Application.UseCase.Extensions;
+using Clinical.Persistence.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,7 +12,6 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddInjectionPersistence();
 builder.Services.AddInjectionApplication();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
