@@ -45,5 +45,16 @@ namespace Clinical.Persistence.Repositories
             var recordAfected = await connection.ExecuteAsync(query, param: parameters, commandType: CommandType.StoredProcedure);
             return recordAfected > 0;
         }
+
+        public async Task<bool> AnalysisEdit(Analysis analysis)
+        {
+            using var connection = _context.CreateConnection;
+            var query = "uspAnalysisEdit";
+            var parameters = new DynamicParameters();
+            parameters.Add("@AnalysisId", analysis.AnalysisId);
+            parameters.Add("@Name", analysis.Name);            
+            var recordAfected = await connection.ExecuteAsync(query, param: parameters, commandType: CommandType.StoredProcedure);
+            return recordAfected > 0;
+        }
     }
 }

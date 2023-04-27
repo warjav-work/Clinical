@@ -1,4 +1,5 @@
 ﻿using Clinical.Application.UseCase.UseCases.Analysis.Commands.CreateCommand;
+using Clinical.Application.UseCase.UseCases.Analysis.Commands.UpdateCommand;
 using Clinical.Application.UseCase.UseCases.Analysis.Queries.GetAllQuery;
 using Clinical.Application.UseCase.UseCases.Analysis.Queries.GetByIdQuery;
 using MediatR;
@@ -33,6 +34,13 @@ namespace Clinical.Api.Controllers
 
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterAnalysis([FromBody] CreateAnalysisCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
+
+        [HttpPut("Edit")]
+        public async Task<IActionResult> EdirAnalysis([FromBody] UpdateAnalysisCommand command)
         {
             var response = await _mediator.Send(command);
             return Ok(response);
