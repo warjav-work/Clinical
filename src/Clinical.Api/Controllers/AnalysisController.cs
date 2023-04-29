@@ -1,5 +1,6 @@
 ﻿using Clinical.Application.UseCase.UseCases.Analysis.Commands.CreateCommand;
 using Clinical.Application.UseCase.UseCases.Analysis.Commands.UpdateCommand;
+using Clinical.Application.UseCase.UseCases.Analysis.DeleteCommand;
 using Clinical.Application.UseCase.UseCases.Analysis.Queries.GetAllQuery;
 using Clinical.Application.UseCase.UseCases.Analysis.Queries.GetByIdQuery;
 using MediatR;
@@ -40,9 +41,16 @@ namespace Clinical.Api.Controllers
         }
 
         [HttpPut("Edit")]
-        public async Task<IActionResult> EdirAnalysis([FromBody] UpdateAnalysisCommand command)
+        public async Task<IActionResult> EditAnalysis([FromBody] UpdateAnalysisCommand command)
         {
             var response = await _mediator.Send(command);
+            return Ok(response);
+        }
+
+        [HttpDelete("Remove/{analysisId:int}")]
+        public async Task<IActionResult> RemoveAnalysis(int analysisId)
+        {
+            var response = await _mediator.Send(new DeleteAnalysisCommand() { AnalysisId = analysisId });
             return Ok(response);
         }
     }
