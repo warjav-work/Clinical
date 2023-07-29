@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Clinical.Application.Interface.Repositories;
+using Clinical.Application.Interface.UnitOfWork;
 using Clinical.Application.UseCase.Commons.Bases;
 using MediatR;
 using Entity = Clinical.Domain.Entities;
@@ -8,12 +8,12 @@ namespace Clinical.Application.UseCase.UseCases.Analysis.Commands.CreateCommand
 {
     public class CreateAnalysisHandler : IRequestHandler<CreateAnalysisCommand, BaseResponse<bool>>
     {
-        private readonly IAnalysisRepository _analysisRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public CreateAnalysisHandler(IAnalysisRepository analysisRepository, IMapper mapper)
+        public CreateAnalysisHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _analysisRepository = analysisRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
         public async Task<BaseResponse<bool>> Handle(CreateAnalysisCommand request, CancellationToken cancellationToken)
@@ -23,7 +23,7 @@ namespace Clinical.Application.UseCase.UseCases.Analysis.Commands.CreateCommand
             try
             {
                 var analysis = _mapper.Map<Entity.Analysis>(request);
-                response.Data = await _analysisRepository.AnalysisRegister(analysis);
+                response.Data = await _unitOfWork.Analisis.ExecAsync("uspAnalysisRegister", new { analysis.Name });
 
                 if (response.Data)
                 {
