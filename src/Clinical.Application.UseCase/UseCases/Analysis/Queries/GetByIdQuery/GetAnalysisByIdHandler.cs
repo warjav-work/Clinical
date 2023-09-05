@@ -2,6 +2,7 @@
 using Clinical.Application.Dtos.Analysis.Response;
 using Clinical.Application.Interface.UnitOfWork;
 using Clinical.Application.UseCase.Commons.Bases;
+using Clinical.Utilities.Constants;
 using MediatR;
 
 namespace Clinical.Application.UseCase.UseCases.Analysis.Queries.GetByIdQuery
@@ -23,18 +24,18 @@ namespace Clinical.Application.UseCase.UseCases.Analysis.Queries.GetByIdQuery
             var response = new BaseResponse<GetAnalysisByIdResponseDto>();
             try
             {
-                var analysis = await _unitOfWork.Analisis.GetByIdAsync("uspAnalysisById", new { request.AnalysisId });
+                var analysis = await _unitOfWork.Analisis.GetByIdAsync(SP.uspAnalysisById, request);
 
                 if (analysis is null)
                 {
                     response.IsSuccess = false;
-                    response.Message = "No se encontraron registros.";
+                    response.Message = GlobalMessages.MESSAGE_QUERY_EMPTY;
                     return response;
                 }
 
                 response.IsSuccess = true;
                 response.Data = _mapper.Map<GetAnalysisByIdResponseDto>(analysis);
-                response.Message = "Consulta realizada con exito.";
+                response.Message = GlobalMessages.MESSAGE_QUERY;
             }
             catch (Exception ex)
             {

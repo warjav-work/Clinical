@@ -18,6 +18,7 @@
     <ProjectReference Include="..\Clinical.Application.Dtos\Clinical.Application.Dtos.csproj" />
     <ProjectReference Include="..\Clinical.Application.Interface\Clinical.Application.Interface.csproj" />
     <ProjectReference Include="..\Clinical.Domain\Clinical.Domain.csproj" />
+    <ProjectReference Include="..\Clinical.Utilities\Clinical.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

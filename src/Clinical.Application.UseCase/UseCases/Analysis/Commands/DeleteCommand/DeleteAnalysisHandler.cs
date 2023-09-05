@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Clinical.Application.Interface.UnitOfWork;
 using Clinical.Application.UseCase.Commons.Bases;
+using Clinical.Utilities.Constants;
 using MediatR;
 
 namespace Clinical.Application.UseCase.UseCases.Analysis.DeleteCommand
@@ -22,12 +23,12 @@ namespace Clinical.Application.UseCase.UseCases.Analysis.DeleteCommand
             try
             {
 
-                response.Data = await _unitOfWork.Analisis.ExecAsync("uspAnalysisRemove", new { request.AnalysisId });
+                response.Data = await _unitOfWork.Analisis.ExecAsync(SP.uspAnalysisRemove, request);
 
                 if (response.Data)
                 {
                     response.IsSuccess = true;
-                    response.Message = "Se eliminó correctamente.";
+                    response.Message = GlobalMessages.MESSAGE_DELETE;
                 }
             }
             catch (Exception ex)

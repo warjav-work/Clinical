@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Clinical.Application.Interface.UnitOfWork;
 using Clinical.Application.UseCase.Commons.Bases;
+using Clinical.Utilities.Constants;
+using Clinical.Utilities.HelperExtensions;
 using MediatR;
 using Entity = Clinical.Domain.Entities;
 
@@ -24,13 +26,13 @@ namespace Clinical.Application.UseCase.UseCases.Analysis.Commands.ChangeStateCom
             try
             {
                 var analisys = _mapper.Map<Entity.Analysis>(request);
-                var parameters = new { analisys.AnalysisId, analisys.State };
-                response.Data = await _unitOfWork.Analisis.ExecAsync("uspAnalysisChangeState", parameters);
+                var parameters = analisys.GetPropertiesWithValues();
+                response.Data = await _unitOfWork.Analisis.ExecAsync(SP.uspAnalysisChangeState, parameters);
 
                 if (response.Data)
                 {
                     response.IsSuccess = true;
-                    response.Message = "Se actualizó el estado correctamente!";
+                    response.Message = GlobalMessages.MESSAGE_UPDATE_STATE;
                 }
 
             }
