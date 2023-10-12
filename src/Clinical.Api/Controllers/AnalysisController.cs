@@ -1,7 +1,7 @@
 ﻿using Clinical.Application.UseCase.UseCases.Analysis.Commands.ChangeStateCommand;
 using Clinical.Application.UseCase.UseCases.Analysis.Commands.CreateCommand;
+using Clinical.Application.UseCase.UseCases.Analysis.Commands.DeleteCommand;
 using Clinical.Application.UseCase.UseCases.Analysis.Commands.UpdateCommand;
-using Clinical.Application.UseCase.UseCases.Analysis.DeleteCommand;
 using Clinical.Application.UseCase.UseCases.Analysis.Queries.GetAllQuery;
 using Clinical.Application.UseCase.UseCases.Analysis.Queries.GetByIdQuery;
 using MediatR;
@@ -60,6 +60,6 @@ namespace Clinical.Api.Controllers
         {
             var response = await _mediator.Send(new DeleteAnalysisCommand() { AnalysisId = analysisId });
             return Ok(response);
-        }        
+        }
     }
 }

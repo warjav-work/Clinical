@@ -1,20 +1,19 @@
-﻿using AutoMapper;
-using Clinical.Application.Interface.UnitOfWork;
+﻿using Clinical.Application.Interface.UnitOfWork;
 using Clinical.Application.UseCase.Commons.Bases;
 using Clinical.Utilities.Constants;
 using MediatR;
 
-namespace Clinical.Application.UseCase.UseCases.Analysis.DeleteCommand
+namespace Clinical.Application.UseCase.UseCases.Analysis.Commands.DeleteCommand
 {
     public class DeleteAnalysisHandler : IRequestHandler<DeleteAnalysisCommand, BaseResponse<bool>>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
 
-        public DeleteAnalysisHandler(IUnitOfWork unitOfWork, IMapper mapper)
+
+        public DeleteAnalysisHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
+
         }
         public async Task<BaseResponse<bool>> Handle(DeleteAnalysisCommand request, CancellationToken cancellationToken)
         {

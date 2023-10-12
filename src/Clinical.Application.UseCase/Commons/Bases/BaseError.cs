@@ -8,7 +8,7 @@ namespace Clinical.Application.UseCase.Commons.Bases
 {
     public class BaseError
     {
-        public string? Propertyname { get; set; }
+        public string? PropertyName { get; set; }
         public string? ErrorMessage { get; set; }
     }
 }

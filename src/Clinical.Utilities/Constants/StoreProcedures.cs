@@ -13,6 +13,7 @@
 
         #region uspExams
         public const string upsExamList = "upsExamList";
+        public const string upsExamById = "upsExamById";
         
         #endregion
 

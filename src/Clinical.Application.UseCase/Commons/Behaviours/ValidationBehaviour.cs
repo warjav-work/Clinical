@@ -25,7 +25,7 @@ namespace Clinical.Application.UseCase.Commons.Behaviours
                     .SelectMany(x => x.Errors)
                     .Select(x => new BaseError()
                     {
-                        Propertyname = x.PropertyName,
+                        PropertyName = x.PropertyName,
                         ErrorMessage = x.ErrorMessage
                     })
                     .ToList();

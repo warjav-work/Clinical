@@ -1,17 +1,17 @@
 ﻿using Clinical.Application.Dtos.Exam;
-using Clinical.Application.Interface.Repositories;
+using Clinical.Application.Interface.UnitOfWork;
 using Clinical.Application.UseCase.Commons.Bases;
 using Clinical.Utilities.Constants;
 using MediatR;
 
-namespace Clinical.Application.UseCase.UseCases.Exams.Queries
+namespace Clinical.Application.UseCase.UseCases.Exams.Queries.GetAllQuery
 {
     public class GetAllExamHandler : IRequestHandler<GetAllExamQuery, BaseResponse<IEnumerable<GetAllExamResponseDto>>>
     {
-        private readonly IExamRepository _examRepository;
-        public GetAllExamHandler(IExamRepository examRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public GetAllExamHandler(IUnitOfWork unitOfWork)
         {
-            _examRepository = examRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<BaseResponse<IEnumerable<GetAllExamResponseDto>>> Handle(GetAllExamQuery request, CancellationToken cancellationToken)
@@ -20,7 +20,7 @@ namespace Clinical.Application.UseCase.UseCases.Exams.Queries
 
             try
             {
-                var exams = await _examRepository.GetAllExam(SP.upsExamList);
+                var exams = await _unitOfWork.Exams.GetAllExam(SP.upsExamList);
 
                 if (exams is not null)
                 {
