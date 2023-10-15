@@ -16,6 +16,8 @@
         public const string upsExamById = "upsExamById";
         public const string uspExamRegister = "uspExamRegister";
         public const string uspExamEdit = "uspExamEdit";
+        public const string upsExamRemove = "upsExamRemove";
+        public const string upsExamChangeState = "upsExamChangeState";
         
         #endregion
 

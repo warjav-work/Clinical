@@ -21,8 +21,4 @@
     <ProjectReference Include="..\Clinical.Utilities\Clinical.Utilities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\Exams\Commands\DeleteCommand\" />
-  </ItemGroup>
-
 </Project>
